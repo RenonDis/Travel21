@@ -1,0 +1,30 @@
+{% extends "photolog/base.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+	<script src="https://openlayers.org/en/v3.19.1/build/ol.js" type="text/javascript"></script>
+
+    <script> {% include 'js/logs.js' %}</script>
+
+    {% csrf_token %}
+
+    <div id="curr-id" style="position:absolute; display:none">NAN</div>
+    <div id="curr-name" style="position:absolute; display:none">NAN</div>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'photolog/logs.css' %}" media="screen">
+    <div class="logcontainer">
+
+            {% include "photolog/filllogs.html" %}
+    </div>
+
+	<input type="button" 
+		   class="button log-button" 
+		   id="switchbut" 
+		   value="Select from Map" 
+		   >
+
+
+
+{% endblock content %}

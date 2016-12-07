@@ -1,0 +1,33 @@
+{% extends "photolog/base.html" %}
+
+
+{% block content %}
+
+ 
+    <body>
+    
+    <article style="padding:5%; width:65%" class="map">
+    
+    <center>
+    
+        <iframe 
+            width="100%" 
+            height="600px" 
+            frameBorder="0" 
+            src="http://umap.openstreetmap.fr/fr/map/voyage-du-petit-21e_106465?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false">        
+        </iframe>
+        
+        <br><br><br><br>
+        <a class="button" href="http://umap.openstreetmap.fr/fr/map/voyage-du-petit-21e_106465" target="_blank">
+            See in full screen
+        </a>
+    
+    </center>
+    
+    </article>
+    
+    
+    
+    </body>
+    
+{% endblock content %}

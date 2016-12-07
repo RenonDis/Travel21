@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Travel21</title>
+    {% load staticfiles %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'photolog/style.css' %}" media="screen">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <script> var intro = [{{intro}}] </script>
+    <script> {% include 'js/vivus.min.js' %}</script>
+    <script> {% include 'js/photolog-jquery.js' %}</script>
+    
+    
+
+    <link rel="shortcut icon" href="{% static 'photolog/bird.ico' %}" type="image/x-icon">
+    
+</head>
+<body>
+
+<div class="fakeheader">
+    <div class="header">
+        <a href="{% url 'welcome' %}">
+        <div class="titlesvg"> 
+        
+        {% include 'photolog/titlesvg.html' %}
+        
+        </div>
+        </a>
+        
+        <div id="menu" class="topmenu">
+            <ul class="menu">
+                <li class="hovered tile"> <a href="{% url 'index' %}">Prologue</a> </li> 
+                <li class="tile"> <a href="{% url 'fillLogs' 3 'NAN' %}">Logs</a> </li>    
+                <li class="tile"> <a href="{% url 'mapview' %}">Map</a> </li>
+                <li class="tile"> <a href="{% url 'about' %}">About</a> </li>
+                <!--<li class="tile"> <a href="">Contact</a> </li>  -->
+            </ul>      
+        </div>
+        
+        <div class="birdsvg" > 
+        <a href="{% url 'admin:index' %}" style="border: none;">
+        {% include 'photolog/birdsvg.html' %}
+        </a>
+        </div>
+        
+        
+    </div>
+</div> 
+
+{% block content %}
+
+
+
+
+
+
+
+{% endblock %}
+
+</body>
+
+<footer>
+<span style="font-family: Cambria"> &#8580; &#8413; </span> Copyleft FooBarBazTravel    
+
+</footer>
+
+
+</html>

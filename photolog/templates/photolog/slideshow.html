@@ -1,0 +1,80 @@
+{% extends "photolog/base.html" %}
+
+
+{% block content %}
+{% load static %}
+    
+    <div class="slideshow"></div>
+    
+    <script> {% include 'js/slide.js' %}</script>
+    <script> {% include 'js/slidajax.js' %}</script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'photolog/mask.css' %}" media="screen">
+    
+    <div class="imgslot displayed">
+        <div class="overlay" style="background-color: black;">
+            
+            <div class="svgloading">
+                {% include 'photolog/loading.svg' %}
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="imgslot">
+    </div>
+    
+    <div class="ajaxtextcontent">
+
+        <script>
+        setDarkMask();
+
+        var idList = {{idList}};
+        var idSide = {{idSide}};
+        var currId = {{currentArticle.id}};
+        
+        // For the first load, we simulate an idSide
+        
+        idSide = [idSide[1],currId];
+        
+        var isFirst = true;
+        
+        $('.svgloading').hide();
+        
+        </script>
+
+        <div class="metaid" style="display:none;">
+        {{currentArticle.id}}
+        </div>
+
+        {% csrf_token %}
+        
+
+    </div>
+    
+    <div class="loading-bar"></div>
+    
+    <div class="controls">
+    
+        <div class="previous">
+            {% include 'photolog/lilmorow.svg' %}
+        </div>
+        <div class="pagecounter">
+            Err
+        </div>
+        <div class="next">
+            {% include 'photolog/lilmorow.svg' %}
+        </div>
+            
+    </div>
+
+    <div class="expandlet">
+    
+        <div class="pluszone">
+        {% include 'photolog/morow.svg' %}
+        </div>
+
+    </div>
+
+    
+{% endblock content %}

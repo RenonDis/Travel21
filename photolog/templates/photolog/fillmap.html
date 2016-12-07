@@ -1,0 +1,44 @@
+{% load static %}
+
+     <div class="log-preview">
+
+        <div id="selectedCountry" class="country-selection">
+
+            <div class="country-text">
+                No country selected 
+            </div>
+
+        </div>
+
+     {% if lastlog %}
+
+         {% for photo in lastlog.relatedPhotos.all %}
+            <div class="pic-preview"
+                 style="background-image:url('/media/{{photo.lowResFile}}'); "
+                 > 
+            </div>
+         {% endfor %}
+
+         {% for log in recentlogs %}
+            {% for photo in log.relatedPhotos.all %}
+                <div class="pic-preview"
+                     style="background-image:url('/media/{{photo.lowResFile}}'); "> 
+                </div>
+            {% endfor %}
+         {% endfor %}
+
+    {% else %}
+
+        No logs to display.
+
+    {% endif %}
+
+
+
+    </div> 
+
+     <div class="log-map">
+         
+         {% include "photolog/selectmap.html" %}
+
+     </div>

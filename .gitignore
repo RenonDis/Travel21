@@ -1,0 +1,8 @@
+*.pyc
+static/
+travel21/settings.py
+travel21/wsgi.py
+media/
+db.sqlite3
+photolog/migrations/
+.project
