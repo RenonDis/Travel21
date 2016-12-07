@@ -1,0 +1,234 @@
+div .logmeta {
+    width: 100%;
+    height: 4em;
+    }
+
+div .logtext {
+    /*text-align: justify;*/
+    width: 100%;
+    height: 4.6em;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    }
+
+div .logtext:after {
+    content: "...";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0.2em;
+    width: 10%;
+    height: 1.3em;
+    }
+
+
+
+
+.logcontainer {
+    margin-top:10%;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    /*max-height: 850px;*/
+}
+
+.logcontainer {
+    width: 78vw;
+    /*background-color: rgba(200,200,200,0.3);*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.first-logs {
+    display: flex;
+    flex: 2 100%;
+    /*background-color: rgba(50,255,50,0.6);*/
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 34vw;
+}
+
+.last-log {
+    width: 45vw;
+    height: 33vw;
+    margin-right: 0.5vw;
+    margin-bottom: 0.3vw;
+    flex: 2 100%;
+    order: 1;
+    background-color: rgba(200,200,255,0.6);
+    transition: all 0.3s;
+    background-size: cover;
+    display: flex;
+
+    top: 200%;
+}
+
+.last-log:hover {
+    width: 45.5vw;
+    margin-right: 0vw;
+}
+
+.recent-log {
+    width: 32vw;
+    margin-bottom: 0.3vw;
+    margin-right: 1vw;
+    order: 2;
+    flex: 1 auto;
+    background-color: rgba(50,50,200,0.8);
+    transition: all 0.3s;
+    background-size: cover;
+    display: flex;
+    font-size: 0.8em;
+
+    top: 200%;
+}
+
+.recent-log:hover {
+    width: 32.5vw;
+}
+
+.other-log {
+    order: 2;
+    background-color: rgba(50,200,200,0.8);
+    width: 25.5vw;
+    height: 16vw;
+    margin-bottom: 0.5vw;
+    margin-right: 0.5vw;
+    transition: all 0.3s;
+    background-size: cover;
+    display: flex;
+    font-size: 0.7em;
+
+    margin-top: 100%;
+}
+
+.other-log:hover {
+    /*height: 16vw;*/
+    width: 26vw;
+    /*margin-bottom: 0.5vw;*/
+    margin-right: 0vw;
+}
+
+.log-veil {
+    width: 100%;
+    background-color: rgba(100,100,100,0.2);
+    transition: all 0.3s;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.log-veil:hover {
+    background-color: rgba(255,255,255,0);
+    cursor: pointer;
+}
+
+.logcontainer a {
+    border: none;
+}
+
+.log-misc {
+    height: 6vw;
+    background-color: rgba(0,0,0,0.7);
+    margin-left: 20%;
+    left:0%;
+    color: white;
+}
+
+.log-misc h1 {
+    display:inline-block;
+    padding: 0% 1%;
+    width: 50%;
+    text-transform: none;
+    }
+
+.log-misc h2 {
+    display:inline-block;
+    border-left: 1px solid #fff;
+    }
+
+/****************************************/
+/* Map selection
+/****************************************/
+
+.log-preview {
+    width: 20vw;
+    height: 40vw;
+    margin-right: 0.5vw;
+    order: 1;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.pic-preview {
+    width: 100%;
+    height: 11.3vw;
+    background-size: cover;
+}
+
+.log-map {
+    width: 57vw;
+    height: 40vw;
+    transition: all 0.3s;
+    order: 2;
+}
+
+.log-button {
+    background-color: rgba(255,255,255,0.7);
+    position:fixed;
+    bottom:-30%; 
+    left:40%; 
+    width:20%;
+}
+
+.log-button:hover {
+    background-color: rgba(255,255,255,0.9);
+}
+
+.country-selection {
+    width: 100%;
+    height: 4vw;
+    background-color: rgba(255,255,255,0.7);
+    text-align: center;
+    display: flex;
+}
+
+.country-text {
+    margin: auto;
+}
+
+
+.map {
+    /*height: 400px;*/
+    width: 100%;
+    height: 100%;
+}
+
+.info-bubble {
+    position: absolute;
+    z-index: 1;
+    top: 2%;
+    left: 2%;
+}
+
+.info-bubble2 {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    top: 2%;
+    right: 2%;
+    padding: 1%;
+    border-radius: 2px;
+    background-color: rgba(255,100,100,0.85);
+}
