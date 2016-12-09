@@ -28,12 +28,12 @@ function initSlide() {
             900);
                 
         $('.expandlet').mouseenter(function() {
-            $('.pluszone').stop(true);
+            $('.pluszone').finish();
             $('.pluszone').css({'transform' : 'rotate('+ 180 +'deg)'});
         });
         
         $('.expandlet').mouseleave(function() {
-            $('.pluszone').stop(true);
+            $('.pluszone').finish();
             $('.pluszone').css({'transform' : 'rotate('+ 0 +'deg)'});
         });
     }
@@ -43,13 +43,13 @@ function hideSlideContent() {
         
         isHidden = true;
 
-        $('.expandlet,#title,.maskcontainer,.slidecontent').stop(true);
+        $('.expandlet,#title,.maskcontainer,.slidecontent').finish();
         
         document.removeEventListener('click',hideSlideContent);
 
         // reset correct behaviour for morow
         $('.expandlet').mouseleave(function() {
-            $('.pluszone').stop(true);
+            $('.pluszone').finish();
             $('.pluszone').css({'transform' : 'rotate('+ 0 +'deg)'});
         });
         
@@ -90,7 +90,7 @@ function showSlideContent() {
     
     // block mouseleave behaviour of morow
     $('.expandlet').mouseleave(function() {
-        $('.pluszone').stop(true);
+        $('.pluszone').finish();
         $('.pluszone').css({'transform' : 'rotate('+ 270 +'deg)'});
     });
     
