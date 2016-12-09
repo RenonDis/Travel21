@@ -1,4 +1,5 @@
 {% load static %}
+{% load liste %}
 
         <script>
         {% if photo.is_dark %}
@@ -30,6 +31,7 @@
                         <!-- All text that you want -->
                         <text id="title" x="10%" y="0" dy="2em">{{currentArticle.title}}</text>
                         <text id="subtitle" x="10%" y="0" dy="6.5em">{{currentArticle.creationDate}}</text>
+                        <text x="10%" y="0" dy="14.5em">{{currentArticle.relatedCountries.all|listindex:0}}</text>
                     </mask>
                     
                 </defs>
@@ -39,8 +41,12 @@
         </div>
             
             <div class="slidecontent">
+    {% autoescape off %}
+
     {{currentArticle.textContent}} 
-    Aliquam purus arcu, convallis vel nisi id, fringilla faucibus odio. Ut sit amet iaculis diam, sed blandit lacus. Duis pellentesque, neque nec ultrices vulputate, eros nisi suscipit elit, a suscipit nisi purus sed ipsum. Duis magna odio, convallis quis libero sit amet, tristique sagittis nisi. Nulla sagittis, ligula id ultricies venenatis, lectus massa auctor ligula, a lacinia mauris tellus sed lacus. Praesent tellus leo, laoreet ac neque sed, rutrum mollis est. Pellentesque euismod suscipit felis id blandit. Mauris feugiat ipsum vel neque vulputate, id egestas tellus auctor. Curabitur sit amet odio ornare, consectetur elit ut, dapibus nibh. Etiam fringilla facilisis nisi, sed efficitur purus dapibus quis. Ut nulla felis, molestie id suscipit nec, euismod id nibh. Duis aliquet non mauris nec luctus. Phasellus odio velit, tempus eget iaculis vitae, ultrices sit amet nunc. Nulla ex lorem, ullamcorper nec ipsum ac, mollis mattis eros. Nullam justo neque, dapibus ut ornare in, suscipit eu justo.
+    {% endautoescape %}
+    <br>
+    
     <br>
     ({{currentArticle.title}}, {{currentArticle.creationDate}})
     </div>

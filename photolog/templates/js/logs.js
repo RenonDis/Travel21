@@ -22,23 +22,28 @@ $(function() {
     logButShow();
 
     function hideMisc() {
-        $('.log-misc').css({left:'100%'});
+        //$('.log-misc').css({left:'100%'});
+        
+        $('.log-misc').slideUp(200);
         
         $('.log-veil').mouseenter( function() {
             var miscDiv = $(this).find('.log-misc');
             miscDiv.stop(true);
-            miscDiv.animate({left:'0%'}, 300);        
+            //miscDiv.animate({left:'0%'}, 300);
+            miscDiv.slideDown(200);        
         });
         
         $('.log-veil').mouseleave( function() {
             var miscDiv = $(this).find('.log-misc');
             miscDiv.stop(true);
-            miscDiv.animate({left:'100%'}, 300);
+            //miscDiv.animate({left:'100%'}, 300);
+            miscDiv.slideUp(200); 
         });
     }
     
     function showMisc() {
-        $('.log-misc').css({left:'0%'});
+        //$('.log-misc').css({left:'0%'});
+        miscDiv.slideDown(200);
     }
     
     hideMisc();

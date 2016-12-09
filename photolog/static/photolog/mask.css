@@ -80,6 +80,15 @@ svg .base {
    font-family: 'Open Sans', serif;
 }
 
+.slidecontent p { 
+    font-size:1em; 
+    font-weight:400; /* Regular */ 
+    line-height:1em; 
+    padding:0.5em 0; 
+    margin-left:0em;
+    text-align: justify;
+    }
+
 /*******************************************************************************
  * Overlay Aesthetics
  ******************************************************************************/
