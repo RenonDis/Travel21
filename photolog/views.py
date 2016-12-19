@@ -17,12 +17,44 @@ from photolog.models import *
 import datetime
 import os, struct, json
 import numpy as np
+import ntpath
+from django.conf import settings
 
 # Global variables here
 
 # Carrying tag variable server-side to lighten ajax processes
 globalTag = 'NAN'
 
+
+# Inner processing function
+
+def clearPhotos():
+    """
+        Deletes photo files that are not related to any photo object
+        To be run after photo object deletion with db api
+    """
+    listPhotoName = []
+    
+    for photo in Photo.objects.all():
+        
+        fileName = ntpath.basename(photo.file.url)
+        listPhotoName.append(fileName)
+        filename, ext = os.path.splitext(fileName)
+        listPhotoName.append(filename + '_lowRes' + ext)
+    
+    filenames = []
+    
+    for path, subdirs, files in os.walk(settings.MEDIA_ROOT):
+        for name in files:
+            item = os.path.join(path, name)
+            if ntpath.basename(item) not in listPhotoName:
+                filenames.append(item)
+                os.remove(item)
+
+    print('Following files were deleted : \n filenames')
+
+
+# Rendering views
 
 def index(request):
     """
