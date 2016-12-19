@@ -51,7 +51,7 @@ def clearPhotos():
                 filenames.append(item)
                 os.remove(item)
 
-    print('Following files were deleted : \n' + filenames)
+    print('Following files were deleted : \n', filenames)
 
 
 # Rendering views
