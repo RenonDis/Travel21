@@ -34,16 +34,16 @@ def clearPhotos():
         To be run after photo object deletion with db api
     """
     listPhotoName = []
-    
+
     for photo in Photo.objects.all():
-        
+
         fileName = ntpath.basename(photo.file.url)
         listPhotoName.append(fileName)
         filename, ext = os.path.splitext(fileName)
         listPhotoName.append(filename + '_lowRes' + ext)
-    
+
     filenames = []
-    
+
     for path, subdirs, files in os.walk(settings.MEDIA_ROOT):
         for name in files:
             item = os.path.join(path, name)
@@ -58,27 +58,27 @@ def clearPhotos():
 
 def index(request):
     """
-        Renders introduction with no intro animation, 
+        Renders introduction with no intro animation,
         also resets globalTag
     """
 
     # Reset globalTag on index tab request
     global globalTag
     globalTag = 'NAN'
-    
+
     return render(request, 'photolog/index.html', {'today': datetime.date.today()})
 
 
 def welcome(request):
     """
-        Renders introduction with intro animation, 
+        Renders introduction with intro animation,
         also resets globalTag
     """
 
     # Reset globalTag on index tab request
     global globalTag
     globalTag = 'NAN'
-    
+
     return render(request, 'photolog/index.html', {'today': datetime.date.today(), 'intro': 1 })
 
 
@@ -91,7 +91,7 @@ def mapView(request):
 
 def fillLogs(request, type, tag='NAN'):
     """
-      Fills logs section with either logs (type 0), whole map selection (type 1), 
+      Fills logs section with either logs (type 0), whole map selection (type 1),
       or log map section (type 2), or whole log section (type 3)
     """
     if tag == 'NAN':
@@ -107,16 +107,16 @@ def fillLogs(request, type, tag='NAN'):
         else:
             listArticle = Article.objects.order_by('-creationDate')
 
-    
+
     if len(listArticle) == 0:
         return HttpResponseRedirect(reverse('welcome'))
- 
+
     else:
         lastlog = listArticle[0]
         recentlogs = listArticle[1:3]
         otherlogs = listArticle[3:]
-    
-    context = { 
+
+    context = {
                'listArticle' : listArticle,
                'lastlog' : lastlog,
                'recentlogs' : recentlogs,
@@ -145,7 +145,7 @@ def checkTag(request, tag):
       Checks if there is any country related to this tag
     """
     countries = Country.objects.filter(tag_Id = tag)
-    
+
     if len(countries):
         listArticle = Article.objects.filter(relatedCountries = countries[0])
         check = len(listArticle)
@@ -195,11 +195,11 @@ def fillSlide(request, type, stage):
     """
         Based on type, launches slideshow, or fills content, or cover
     """
-    currentArticle = get_object_or_404(Article, id = int(stage))
-    
+    currentArticle = Article.objects.all()[0]
+
     photo = currentArticle.relatedPhotos.all()[0]
-    
-    (idSide, idList) = getSideId(stage)
+
+    (idSide, idList) = getSideId(currentArticle.id)
 
     context = {
                'idSide' : idSide,
@@ -238,7 +238,7 @@ def aboutView(request):
     # #     print "Une bouteille du nom de "+nom+ " et de quantite "+quantite
 
 
-    # listArticle = Article.objects.order_by('-creationDate')    
+    # listArticle = Article.objects.order_by('-creationDate')
 
     # currentArticle = listArticle[0]
 
@@ -257,7 +257,7 @@ def aboutView(request):
 
 
     # return JsonResponse({"HTTPRESPONSE":str(photo.file),"contextt":text})
-    
+
 
 
 
