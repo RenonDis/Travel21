@@ -195,7 +195,10 @@ def fillSlide(request, type, stage):
     """
         Based on type, launches slideshow, or fills content, or cover
     """
-    currentArticle = Article.objects.all()[0]
+    if int(type) == 3:
+        currentArticle = Article.objects.latest('id')
+    else:
+        currentArticle = get_object_or_404(Article, id = stage)
 
     photo = currentArticle.relatedPhotos.all()[0]
 
@@ -209,7 +212,7 @@ def fillSlide(request, type, stage):
                'today': datetime.date.today(),
                }
 
-    if int(type) == 2:
+    if int(type) == 2 or int(type) == 3:
         return render(request, 'photolog/slideshow.html', context)
     elif int(type) == 1:
         return render(request, 'photolog/fillslide.html', context)
