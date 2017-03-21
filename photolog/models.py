@@ -14,6 +14,18 @@ import os
 import datetime
 from numpy import unique
 
+
+class Location(models.Model):
+    """
+        Singleton storing current location
+    """
+    city = models.CharField(max_length=200, default='No City', verbose_name='City')
+    country = models.CharField(max_length=200, default='No Country', verbose_name='Country')
+
+    def __str__(self):
+        return str(self.city)
+
+
 class Photo(models.Model):
     """
         Stores photo and meta, plus low res verion to speed up loadings
@@ -155,7 +167,4 @@ class Article(models.Model):
         super(Article, self).save(*args, **kwargs)
 
         self.tidyPhoto()
-
-
-
 

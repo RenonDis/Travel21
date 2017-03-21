@@ -27,3 +27,4 @@ class AdmPhoto(admin.ModelAdmin):
 admin.site.register(Article, AdmArticle)
 admin.site.register(Photo, AdmPhoto)
 admin.site.register(Country)
+admin.site.register(Location)

@@ -66,7 +66,12 @@ def index(request):
     global globalTag
     globalTag = 'NAN'
 
-    return render(request, 'photolog/index.html', {'today': datetime.date.today()})
+    context = {'today': datetime.date.today(),
+               'city': Location.objects.all()[0].city,
+               'country': Location.objects.all()[0].country
+               }
+
+    return render(request, 'photolog/index.html', context)
 
 
 def welcome(request):
