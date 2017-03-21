@@ -84,7 +84,13 @@ def welcome(request):
     global globalTag
     globalTag = 'NAN'
 
-    return render(request, 'photolog/index.html', {'today': datetime.date.today(), 'intro': 1 })
+    context = {'today': datetime.date.today(),
+               'city': Location.objects.all()[0].city,
+               'country': Location.objects.all()[0].country,
+               'intro': 1
+               }
+
+    return render(request, 'photolog/index.html', context)
 
 
 def mapView(request):
