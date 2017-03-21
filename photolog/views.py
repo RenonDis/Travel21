@@ -67,8 +67,8 @@ def index(request):
     globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
-               'city': Location.objects.all()[0].city,
-               'country': Location.objects.all()[0].country
+               'city': Location.objects.latest('id').city,
+               'country': Location.objects.latest('id').country
                }
 
     return render(request, 'photolog/index.html', context)
@@ -85,8 +85,8 @@ def welcome(request):
     globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
-               'city': Location.objects.all()[0].city,
-               'country': Location.objects.all()[0].country,
+               'city': Location.objects.latest('id').city,
+               'country': Location.objects.latest('id').country,
                'intro': 1
                }
 
