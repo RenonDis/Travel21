@@ -67,8 +67,8 @@ def index(request):
     globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
-               'city': Location.objects.latest('id').city,
-               'country': Location.objects.latest('id').country
+               'city': Location.objects.order_by('-id')[0].city,
+               'country': Location.objects.order_by('-id')[0].country
                }
 
     return render(request, 'photolog/index.html', context)
@@ -85,8 +85,8 @@ def welcome(request):
     globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
-               'city': Location.objects.latest('id').city,
-               'country': Location.objects.latest('id').country,
+               'city': Location.objects.order_by('-id')[0].city,
+               'country': Location.objects.order_by('-id')[0].country,
                'intro': 1
                }
 
@@ -127,11 +127,16 @@ def fillLogs(request, type, tag='NAN'):
         recentlogs = listArticle[1:3]
         otherlogs = listArticle[3:]
 
+        if len(otherlogs) > 6:
+            additionnallogs = otherlogs[6:]
+            otherlogs = otherlogs[0:6]
+
     context = {
                'listArticle' : listArticle,
                'lastlog' : lastlog,
                'recentlogs' : recentlogs,
                'otherlogs' : otherlogs,
+               'additionnallogs' : additionnallogs,
                'today': datetime.date.today(),
                 }
     if int(type) == 3:
@@ -149,6 +154,41 @@ def fillLogs(request, type, tag='NAN'):
 
     else:
         return render(request, 'photolog/filllogs.html', context)
+
+def moreLogs(request, step):
+    """
+        Add more logs. Step contains the number of 'more' clicked, and determines what logs to send.
+    """
+    point = 9 + step * 9
+
+    if tag == 'NAN':
+        listArticle = Article.objects.order_by('-creationDate')
+    else:
+        countries = Country.objects.filter(tag_Id = tag)
+
+        if len(countries):
+            currentCountry = countries[0]
+
+            listArticle = Article.objects.filter(relatedCountries = currentCountry).order_by('-creationDate')
+
+        else:
+            listArticle = Article.objects.order_by('-creationDate')
+
+    if len(listArticle) <= point:
+        return 0
+
+    else:
+        if len(listArticle) <= (point + 9):
+            context = {
+                       'additionnallogs' : listArticle[point:],
+                      }
+
+        else:
+            context = {
+                       'additionnallogs' : listArticle[point:point+9],
+                      }
+
+        return(request, 'photolog/morelogs.html', context) 
 
 
 def checkTag(request, tag):
