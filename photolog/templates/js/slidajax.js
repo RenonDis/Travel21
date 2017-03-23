@@ -301,11 +301,16 @@ $(function() {
     
     // Define explicit func for clarity
     function goPrevious(idSide) {
-        goAnySide(idSide, 1);
+        // Adding condition to avoid user overflows
+        if (!($('.page-is-changing').length)) {
+            goAnySide(idSide, 1);
+        }
     }
 
     function goNext(idSide) {
-        goAnySide(idSide, 0);
+        if (!($('.page-is-changing').length)) {
+            goAnySide(idSide, 0);
+        }
     }
 
     $(document).keydown(function(e) {
