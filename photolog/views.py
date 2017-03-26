@@ -131,6 +131,9 @@ def fillLogs(request, type, tag='NAN'):
             additionnallogs = otherlogs[6:]
             otherlogs = otherlogs[0:6]
 
+        else:
+            additionnallogs = []
+
     context = {
                'listArticle' : listArticle,
                'lastlog' : lastlog,
