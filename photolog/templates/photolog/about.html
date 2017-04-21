@@ -61,6 +61,18 @@
     this site is availabe on this repo : 
     <p> <a href="https://bitbucket.org/florentin_vallee/travel21-v2"> https://bitbucket.org/florentin_vallee/travel21-v2 </a>
     <p>Feel free to send me any advice to improve this code !
+
+    </p>
+
+    <h2> Places I've visited </h2>
+
+    <p>
+    <ul>
+        {% for location in locations %}
+        <li> {{location.city}}, {{location.country}}; </li>
+
+        {% endfor %}
+    </ul>
     
     </article>
     

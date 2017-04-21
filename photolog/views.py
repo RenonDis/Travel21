@@ -278,7 +278,7 @@ def aboutView(request):
     """
         Quite empty for now, rendering About stuff
     """
-    return render(request, 'photolog/about.html', {'today': datetime.date.today() })
+    return render(request, 'photolog/about.html', {'today': datetime.date.today(), 'locations' : Location.objects.all() })
 
 
 
