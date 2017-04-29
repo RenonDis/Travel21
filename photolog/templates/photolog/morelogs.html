@@ -1,0 +1,28 @@
+{% load static %}
+{% load liste %}
+
+        {% for log in additionnallogs %}
+        
+            {% for photo in log.relatedPhotos.all %}
+            <div class="other-log other-more" 
+                 style="background-image:url('/media/{{photo.lowResFile}}'); "
+                 onclick="window.location='{% url 'fillslide' 2 log.id %}';">
+                 
+                <div class="log-veil">
+                
+                    <div class="log-misc">
+                    
+                        <div class="logmeta">
+                            <h1> {{log.title}}  </h1>
+                            <h2> {{log.creationDate}} </h2>
+                            <h3> {{log.relatedCountries.all|listindex:0}} </h3>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            {% endfor %}    
+        
+        {% endfor %}
