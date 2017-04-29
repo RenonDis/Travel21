@@ -98,11 +98,17 @@ $(function() {
         }
         showFooter();
         }, 4*speedFactor);
+
+        $('.morelog-button').show();
+
     }
     
     logUpShow(speedFactor);
 
     function hideLogs(speedFactor) {
+        $('.morelog-button').hide();
+        removeMoreLogs();
+
         hideFooter();
     
         var logs = [];
@@ -258,6 +264,51 @@ $(function() {
         type = 1 - type;
     })
     
+
+
+    //Ajax stuff for displaying more logs
+
+    // Call fillslide to fill text areas
+
+    function getMoreLogs() {
+
+        // Inserting new morelogsAjax div for more logs
+        $('<div class="morelogsAjax logcontainer morelogs"></div>').insertAfter('.logcontainer:last');
+
+        var stepMoreLogs = $('.morelogsAjax').length;
+
+        console.log(stepMoreLogs);
+
+        $('.morelogsAjax:last')
+            .load("{% url 'moreLogs' 2345 %}".replace(/2345/, stepMoreLogs.toString()), 
+                function( response, status, xhr ) {
+                if ( status == "error" ) {
+                    var msg = "Sorry but there was an error: ";
+                    console.log("LOAD ERROR")
+                    console.log( msg + xhr.status + " " + xhr.statusText );
+                }
+            });
+
+        $( document ).ajaxComplete(function() {
+
+            // Unbinding to prevent second call from the other ajax call for text content
+            $( document ).unbind('ajaxComplete');
+
+            hideMisc();
+
+        });
+    }
+
+    function removeMoreLogs() {
+        $('.morelogsAjax').remove();
+
+    }
+
+    $('#morelogsbut').click( function() {
+        getMoreLogs();
+    })
+
+
 
 
 });

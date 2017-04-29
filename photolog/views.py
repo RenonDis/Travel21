@@ -162,7 +162,11 @@ def moreLogs(request, step):
     """
         Add more logs. Step contains the number of 'more' clicked, and determines what logs to send.
     """
-    point = 9 + step * 9
+    moreLogStep = 6
+
+    point = 9 + (int(step)-1) * moreLogStep
+
+    tag = globalTag
 
     if tag == 'NAN':
         listArticle = Article.objects.order_by('-creationDate')
@@ -178,20 +182,26 @@ def moreLogs(request, step):
             listArticle = Article.objects.order_by('-creationDate')
 
     if len(listArticle) <= point:
-        return 0
+
+        print('nolog')
+        context = {
+                   'additionnallogs' : [],
+                  }
+
+        return render(request, 'photolog/morelogs.html', context)
 
     else:
-        if len(listArticle) <= (point + 9):
+        if len(listArticle) <= (point + moreLogStep):
             context = {
                        'additionnallogs' : listArticle[point:],
                       }
 
         else:
             context = {
-                       'additionnallogs' : listArticle[point:point+9],
+                       'additionnallogs' : listArticle[point:point+moreLogStep],
                       }
 
-        return(request, 'photolog/morelogs.html', context) 
+        return render(request, 'photolog/morelogs.html', context) 
 
 
 def checkTag(request, tag):

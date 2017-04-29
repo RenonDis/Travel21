@@ -41,6 +41,10 @@ div .logtext:after {
     justify-content: flex-start;
 }
 
+.morelogs {
+    margin-top:0%;
+}
+
 .first-logs {
     display: flex;
     flex: 2 100%;
@@ -68,6 +72,7 @@ div .logtext:after {
 
     top: 200%;
 }
+
 
 .last-log:hover {
     width: 45.5vw;
@@ -106,6 +111,11 @@ div .logtext:after {
     font-size: 0.7em;
 
     margin-top: 100%;
+}
+
+
+.other-more {
+    margin-top: 0%;
 }
 
 .other-log:hover {
@@ -207,10 +217,17 @@ div .logtext:after {
     bottom:-30%; 
     left:40%; 
     width:20%;
+    z-index: 2;
 }
 
 .log-button:hover {
     background-color: rgba(255,255,255,0.9);
+}
+
+.morelog-button {
+    margin-left: 10%;
+    margin-top: 2%;
+    padding: 1% 2%;
 }
 
 .country-selection {
