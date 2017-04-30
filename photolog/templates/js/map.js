@@ -423,7 +423,7 @@
 		function checkTag(tag) {
 
 		        $.ajax({
-		    	 url: "{% url 'checkTag' 2345 %}".replace(/2345/g, tag.toString()),
+		    	   url: "{% url 'checkTag' 2345 %}".replace(/2345/g, tag.toString()),
 		         type: "POST",
 		         dataType: "json",
 		         traditional: true,

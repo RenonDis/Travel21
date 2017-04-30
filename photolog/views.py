@@ -23,7 +23,8 @@ from django.conf import settings
 # Global variables here
 
 # Carrying tag variable server-side to lighten ajax processes
-globalTag = 'NAN'
+# Bad idea, left here for remembrance : this modify state of server for all users by action of one !!
+#globalTag = 'NAN'
 
 
 # Inner processing function
@@ -58,13 +59,8 @@ def clearPhotos():
 
 def index(request):
     """
-        Renders introduction with no intro animation,
-        also resets globalTag
+        Renders introduction with no intro animation
     """
-
-    # Reset globalTag on index tab request
-    global globalTag
-    globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
                'city': Location.objects.order_by('-id')[0].city,
@@ -76,13 +72,8 @@ def index(request):
 
 def welcome(request):
     """
-        Renders introduction with intro animation,
-        also resets globalTag
+        Renders introduction with intro animation
     """
-
-    # Reset globalTag on index tab request
-    global globalTag
-    globalTag = 'NAN'
 
     context = {'today': datetime.date.today(),
                'city': Location.objects.order_by('-id')[0].city,
@@ -140,13 +131,10 @@ def fillLogs(request, type, tag='NAN'):
                'recentlogs' : recentlogs,
                'otherlogs' : otherlogs,
                'additionnallogs' : additionnallogs,
-               'today': datetime.date.today(),
+               'today' : datetime.date.today(),
+               'tag' : tag,
                 }
     if int(type) == 3:
-        # Reset globalTag on logs tab request
-        global globalTag
-        globalTag = 'NAN'
-
         return render(request, 'photolog/logs.html', context)
 
     elif int(type) == 2:
@@ -158,15 +146,13 @@ def fillLogs(request, type, tag='NAN'):
     else:
         return render(request, 'photolog/filllogs.html', context)
 
-def moreLogs(request, step):
+def moreLogs(request, step, tag='NAN'):
     """
         Add more logs. Step contains the number of 'more' clicked, and determines what logs to send.
     """
     moreLogStep = 6
 
     point = 9 + (int(step)-1) * moreLogStep
-
-    tag = globalTag
 
     if tag == 'NAN':
         listArticle = Article.objects.order_by('-creationDate')
@@ -194,11 +180,13 @@ def moreLogs(request, step):
         if len(listArticle) <= (point + moreLogStep):
             context = {
                        'additionnallogs' : listArticle[point:],
+                       'tag' : tag,
                       }
 
         else:
             context = {
                        'additionnallogs' : listArticle[point:point+moreLogStep],
+                       'tag' : tag,
                       }
 
         return render(request, 'photolog/morelogs.html', context) 
@@ -214,25 +202,22 @@ def checkTag(request, tag):
         listArticle = Article.objects.filter(relatedCountries = countries[0])
         check = len(listArticle)
 
-        # Store found tag as globalTag
-        global globalTag
-        globalTag = tag
     else:
         check = 0
 
     return JsonResponse({"check": check})
 
 
-def getSideId(stage):
+def getSideId(stage, tag='NAN'):
     """
         Based on stage, returns a pair of ids, of side articles of same tag
     """
     idList = []
 
-    if globalTag == 'NAN':
+    if tag == 'NAN':
         listArticle = Article.objects.order_by('-creationDate')
     else:
-        currentCountry = Country.objects.filter(tag_Id = globalTag)[0]
+        currentCountry = Country.objects.filter(tag_Id = tag)[0]
         listArticle = Article.objects.filter(relatedCountries = currentCountry).order_by('-creationDate')
 
     for article in listArticle:
@@ -255,7 +240,7 @@ def getSideId(stage):
     return (idSide, idList)
 
 
-def fillSlide(request, type, stage):
+def fillSlide(request, type, stage, tag='NAN'):
     """
         Based on type, launches slideshow, or fills content, or cover
     """
@@ -266,14 +251,15 @@ def fillSlide(request, type, stage):
 
     photo = currentArticle.relatedPhotos.all()[0]
 
-    (idSide, idList) = getSideId(currentArticle.id)
+    (idSide, idList) = getSideId(currentArticle.id, tag)
 
     context = {
                'idSide' : idSide,
                'idList' : idList,
                'currentArticle' : currentArticle,
-               'photo': photo,
-               'today': datetime.date.today(),
+               'photo' : photo,
+               'today' : datetime.date.today(),
+               'tag' : tag,
                }
 
     if int(type) == 2 or int(type) == 3:

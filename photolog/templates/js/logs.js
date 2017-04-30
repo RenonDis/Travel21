@@ -192,7 +192,7 @@ $(function() {
     var isId = 'NAN';
     var tag = 'NAN';
 
-    // Call fillcover with img bg for next slide
+    // Depending on the type, either fill side logs or full page logs
     function ajaxFillLogs(type) {
 
         // Hide current type
@@ -268,8 +268,6 @@ $(function() {
 
     //Ajax stuff for displaying more logs
 
-    // Call fillslide to fill text areas
-
     function getMoreLogs() {
 
         // Inserting new morelogsAjax div for more logs
@@ -280,8 +278,10 @@ $(function() {
         console.log(stepMoreLogs);
 
         $('.morelogsAjax:last')
-            .load("{% url 'moreLogs' 2345 %}".replace(/2345/, stepMoreLogs.toString()), 
-                function( response, status, xhr ) {
+            .load("{% url 'moreLogs' 2345 4567 %}"
+                .replace(/2345/, stepMoreLogs.toString())
+                .replace(/4567/, tag.toString())
+                , function( response, status, xhr ) {
                 if ( status == "error" ) {
                     var msg = "Sorry but there was an error: ";
                     console.log("LOAD ERROR")

@@ -87,6 +87,8 @@ $(function() {
 //     });
 
 
+    // Get current tag
+
     idNext = 0;
     idPrev = 0;
 
@@ -178,6 +180,11 @@ $(function() {
 
         var isHid = isHidden;
         
+        var curr_tag = $('#curr-tag').text();
+
+        console.log('curr tag is :');
+        console.log(curr_tag);
+
         //Hide expandlet and controls if first
         
         if ( isFirst ) {
@@ -204,8 +211,10 @@ $(function() {
         var displayedDiv = $('.displayed');
         var hiddenDiv = $('.imgslot').not('.displayed');
         
-        // Call fillcover with img bg for next slide
-        hiddenDiv.load("{% url 'fillslide' 0 2345 %}".replace(/2345/, idToFetch.toString()), function( response, status, xhr ) {
+        // Call fillcover with img bg for next slide .replace(/tag/, curr_tag.toString())
+        hiddenDiv.load("{% url 'fillslide' 0 2345 4567 %}"
+                    .replace(/2345/, idToFetch.toString())
+                    .replace(/4567/, curr_tag.toString()), function( response, status, xhr ) {
             if ( status == "error" ) {
                 var msg = "Sorry but there was an error: ";
                 console.log("LOAD ERROR")
@@ -238,9 +247,12 @@ $(function() {
                     // Clearing the event to prevent second calls
                     img.onload = null;
                     
-                    // Call fillslide to fill text areas
+                    // Call fillslide to fill text areas .replace(/tag/, curr_tag.toString())
+                    
                     $('.ajaxtextcontent')
-                        .load("{% url 'fillslide' 1 2345 %}".replace(/2345/, idToFetch.toString()), function( response, status, xhr ) {
+                        .load("{% url 'fillslide' 1 2345 4567 %}"
+                            .replace(/2345/, idToFetch.toString())
+                            .replace(/4567/, curr_tag.toString()), function( response, status, xhr ) {
                             if ( status == "error" ) {
                                 var msg = "Sorry but there was an error: ";
                                 console.log("LOAD ERROR")

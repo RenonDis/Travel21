@@ -8,7 +8,7 @@
             {% for photo in lastlog.relatedPhotos.all %}
                 <div class="last-log" 
                      style="background-image:url('/media/{{photo.lowResFile}}'); "
-                     onclick="window.location='{% url 'fillslide' 2 lastlog.id %}';">
+                     onclick="window.location='{% url 'fillslide' 2 lastlog.id tag %}';">
                      
                     <div class="log-veil">
                     
@@ -32,7 +32,7 @@
                     {% for photo in log.relatedPhotos.all %}
                     <div class="recent-log" 
                          style="background-image:url('/media/{{photo.lowResFile}}'); "
-                         onclick="window.location='{% url 'fillslide' 2 log.id %}';">
+                         onclick="window.location='{% url 'fillslide' 2 log.id tag %}';">
                          
                         <div class="log-veil">
                     
@@ -60,7 +60,7 @@
             {% for photo in log.relatedPhotos.all %}
             <div class="other-log" 
                  style="background-image:url('/media/{{photo.lowResFile}}'); "
-                 onclick="window.location='{% url 'fillslide' 2 log.id %}';">
+                 onclick="window.location='{% url 'fillslide' 2 log.id tag %}';">
                  
                 <div class="log-veil">
                 
