@@ -111,7 +111,8 @@ $( document ).ready(function() {
         }, globalDelay);
     }
     
-    function tileShow(){
+    // tileShow to animate tiles (or not) and setting the active one
+    function tileShow(type){
     
         var tiles = [];
         $('.tile').each( function() {
@@ -120,11 +121,8 @@ $( document ).ready(function() {
             });
             tiles.push($(this));
         });
-        //console.log(tiles);
+
         var numberTiles = tiles.length;
-        for (var i = 0; i < numberTiles; i++) {
-            tiles[i].css({top:'-100px',});
-        }
         
         //setting active tile
         
@@ -153,17 +151,25 @@ $( document ).ready(function() {
         }
         
         //dropping tiles in display
-        window.setTimeout( function() {
-        for (var j = 0; j < numberTiles; j++) {
-            tiles[j].delay(j*100).animate({
-                top:'0px'},{
-                easing: 'swing',
-                duration: 400,
-                complete: function(){}}
-                
-                );
+
+        if (type) {
+            for (var i = 0; i < numberTiles; i++) {
+                tiles[i].css({top:'-100px',});
+            }
+
+            window.setTimeout( function() {
+            for (var j = 0; j < numberTiles; j++) {
+                tiles[j].delay(j*100).animate({
+                    top:'0px'},{
+                    easing: 'swing',
+                    duration: 400,
+                    complete: function(){}}
+                    
+                    );
+            }
+            },500 + globalDelay);
         }
-        },500 + globalDelay);
+
     }
     
     function fakeHover() {
@@ -190,7 +196,7 @@ $( document ).ready(function() {
             $("#Logo").show();
             drawBird();}, 2000 + globalDelay
         );
-        tileShow();
+        tileShow(1);
         window.setTimeout( function(){
             drawTitle();
             $('.introtitle').hide();
@@ -216,6 +222,7 @@ $( document ).ready(function() {
         else {
             globalDelay = 0;
             articleShow();
+            tileShow(0);
         }
     }
     
@@ -223,9 +230,9 @@ $( document ).ready(function() {
     else {
     
         $('footer').hide();
-        
-            $('.header').hide();
-            $('.topmenu').hide();
+        $('.header').hide();
+        $('.topmenu').hide();
+
         window.setTimeout( function(){
             fakeHover();}, 250
         );
