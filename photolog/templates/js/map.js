@@ -60,7 +60,7 @@
 
 		var countriesLayer = new ol.layer.Vector({
 	        source: new ol.source.Vector({
-	          url: 'http://openlayers.org/en/latest/examples/data/geojson/countries.geojson',
+	          url: 'https://openlayers.org/en/latest/examples/data/geojson/countries.geojson',
 	          format: new ol.format.GeoJSON()
 	        }),
 	        style: function(feature, resolution) {

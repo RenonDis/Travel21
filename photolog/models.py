@@ -7,12 +7,12 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.template.defaultfilters import default
 from django.conf import settings
 
-from PIL import Image
+#from PIL import Image
 
 import struct
 import os
 import datetime
-from numpy import unique
+#from numpy import unique
 
 
 class Location(models.Model):
@@ -50,9 +50,9 @@ class Photo(models.Model):
 
             cwd = os.getcwd()
 
-            im = Image.open(cwd+filePath)
-            nx, ny = im.size
-            im2 = im.resize((int(nx*0.4), int(ny*0.4)), Image.ANTIALIAS)
+            im = im2 # Image.open(cwd+filePath)
+            #nx, ny = im.size
+            #im2 = im.resize((int(nx*0.4), int(ny*0.4)), Image.ANTIALIAS)
 
             newName = str(cwd + filename + '_lowRes' + ext)
 

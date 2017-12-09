@@ -16,7 +16,7 @@ from photolog.models import *
 
 import datetime
 import os, struct, json
-import numpy as np
+#import numpy as np
 import ntpath
 from django.conf import settings
 
