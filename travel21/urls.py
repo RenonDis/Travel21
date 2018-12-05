@@ -27,4 +27,4 @@ urlpatterns = [
     url(r'^photolog/', include('photolog.urls')),
     url(r'^$', views.welcome, name='welcome'),
     url(r'^admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.template import loader, RequestContext
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.utils import timezone
@@ -16,7 +16,6 @@ from photolog.models import *
 
 import datetime
 import os, struct, json
-import numpy as np
 import ntpath
 from django.conf import settings
 

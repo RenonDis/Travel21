@@ -12,7 +12,6 @@ from PIL import Image
 import struct
 import os
 import datetime
-from numpy import unique
 
 
 class Location(models.Model):
